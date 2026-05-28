@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Saikrishna Sunkara - Freelance Photographer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  :root {
+    --cream: #f5f2ec;
+    --ink: #1a1916;
+    --ink-soft: #4a4843;
+    --ink-faint: #9a9890;
+    --accent: #c8a96e;
+    --accent-light: #e8dcc8;
+    --white: #ffffff;
+    --border: rgba(26,25,22,0.1);
+  }
+ 
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+ 
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: rgba(245,242,236,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+ 
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+ 
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-links a.active { border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+ 
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+  }
+ 
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 4rem;
+  }
+ 
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+ 
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 5.5vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+ 
+  .hero-title em {
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+ 
+  .hero-desc {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    max-width: 400px;
+    margin-bottom: 3rem;
+  }
+ 
+  .hero-ctas { display: flex; gap: 1rem; align-items: center; }
+ 
+  .btn-primary {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--ink-soft); transform: translateY(-1px); }
+ 
+  .btn-ghost {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    border: 1px solid var(--border);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--ink); background: rgba(26,25,22,0.04); }
+ 
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--ink);
+  }
+ 
+  .hero-img-grid {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+    gap: 3px;
+  }
+ 
+  .hero-img-block {
+    background: var(--ink-soft);
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .hero-img-block:first-child { aspect-ratio: 2/3; }
+ 
+  .hero-img-placeholder {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.3);
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+ 
+  .hero-img-placeholder svg {
+    width: 32px; height: 32px;
+    opacity: 0.25;
+  }
+ 
+  /* Hero image overlay text */
+  .hero-img-label {
+    position: absolute;
+    bottom: 1rem; left: 1rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.55);
+  }
+ 
+  /* STATS STRIP */
+  .stats-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--white);
+  }
+ 
+  .stat-item {
+    padding: 2.5rem 2rem;
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+  .stat-item:last-child { border-right: none; }
+ 
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+ 
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+ 
+  /* ABOUT */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 7rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+ 
+  .about-left { padding-right: 5rem; }
+ 
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+ 
+  .about-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+ 
+  .about-title em { font-style: italic; color: var(--ink-soft); }
+ 
+  .about-body {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-bottom: 1.5rem;
+  }
+ 
+  .about-instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: color 0.2s;
+  }
+  .about-instagram:hover { color: var(--accent); }
+ 
+  .about-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+  }
+ 
+  .about-img-block {
+    background: var(--ink-soft);
+    aspect-ratio: 3/4;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-img-block:first-child {
+    grid-column: 1 / 3;
+    aspect-ratio: 16/9;
+  }
+ 
+  /* GENRES */
+  .genres {
+    padding: 5rem 4rem 7rem;
+    background: var(--ink);
+  }
+ 
+  .genres-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+ 
+  .genres-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+  }
+ 
+  .genres-title em { font-style: italic; color: var(--accent); }
+ 
+  .genres-link {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(200,169,110,0.35);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+    white-space: nowrap;
+    margin-left: 2rem;
+  }
+  .genres-link:hover { border-color: var(--accent); }
+ 
+  .genres-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+ 
+  .genre-card {
+    aspect-ratio: 3/4;
+    background: var(--ink-soft);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+  }
+ 
+  .genre-card:hover .genre-overlay { opacity: 1; }
+  .genre-card:hover .genre-img-bg { transform: scale(1.04); }
+ 
+  .genre-img-bg {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.6s ease;
+    background: var(--ink-soft);
+  }
+ 
+  .genre-overlay {
+    position: absolute; inset: 0;
+    background: rgba(26,25,22,0.55);
+    opacity: 0;
+    transition: opacity 0.4s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+ 
+  .genre-overlay-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cream);
+  }
+ 
+  .genre-arrow {
+    width: 28px; height: 28px;
+    border: 1px solid rgba(245,242,236,0.5);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+ 
+  .genre-footer {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1.2rem 1rem 1rem;
+    background: linear-gradient(to top, rgba(26,25,22,0.7) 0%, transparent 100%);
+  }
+ 
+  .genre-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--cream);
+    letter-spacing: 0.03em;
+  }
+ 
+  .genre-count {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.5);
+  }
+ 
+  /* PROCESS */
+  .process {
+    padding: 7rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+ 
+  .process-header { text-align: center; margin-bottom: 4rem; }
+ 
+  .process-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 300;
+    color: var(--ink);
+    margin-top: 0.75rem;
+  }
+  .process-title em { font-style: italic; color: var(--ink-soft); }
+ 
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+ 
+  .process-step { text-align: center; }
+ 
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--accent-light);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+ 
+  .step-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+ 
+  .step-desc {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+ 
+  /* CTA STRIP */
+  .cta-strip {
+    background: var(--ink);
+    padding: 5rem 4rem;
+    text-align: center;
+  }
+ 
+  .cta-strip-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 1rem;
+  }
+  .cta-strip-title em { font-style: italic; color: var(--accent); }
+ 
+  .cta-strip-sub {
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+ 
+  .btn-accent {
+    display: inline-block;
+    padding: 0.9rem 2.8rem;
+    background: var(--accent);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-accent:hover { background: #d4b87a; transform: translateY(-1px); }
+ 
+  /* FOOTER */
+  footer {
+    padding: 2.5rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    background: var(--cream);
+  }
+ 
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+    letter-spacing: 0.05em;
+  }
+ 
+  .footer-copy {
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.05em;
+  }
+ 
+  .footer-social {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-social:hover { color: var(--accent); }
+ 
+  /* PLACEHOLDER ART */
+  .ph { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; gap: 0.5rem; }
+  .ph svg { opacity: 0.18; }
+  .ph span { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(245,242,236,0.25); }
+ 
+  /* animate on load */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.35s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+ 
+<nav>
+  <a href="index.html" class="nav-logo">Saikrishna Sunkara</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="gallery.html">Portfolio</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+ 
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <h1 class="hero-title">Your vision<br/><em>My eyes</em><br/></h1>
+    <div class="hero-ctas">
+      <a href="gallery.html" class="btn-primary">View Portfolio</a>
+      <a href="contact.html" class="btn-ghost">Book a Session</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-grid">
+      <div class="hero-img-block">
+        <img src="images/IMG_5894.jpg" alt="Portrait photograph" 
+        style="width:100%; height:100%; object-fit:cover; object-position: center 40%;" />
+      </div>
+      <div class="hero-img-block">
+        <img src="images/IMG_9723.jpg" alt="Coastal landscape" 
+        style="width:100%; height:100%; object-fit:cover; object-position: center 40%;" />
+      </div>
+      <div class="hero-img-block">
+        <img src="images/IMG_0724.jpg" alt="Motorsport photograph" 
+        style="width:100%; height:100%; object-fit:cover; object-position: center 40%;" />
+      </div>
+    </div>
+  </div>
+</section>
+ 
+
+ 
+<!-- ABOUT -->
+<section class="about">
+  <div class="about-left">
+    <h2 class="about-title">About <em>the eyes</em><br/>behind the camera.</h2>
+    <p class="about-body">
+      My name is Saikrishna Sunkara, a 21 year old college student and freelance photographer
+      based in the Bay Area, and Madison, WI. Photography is a very recent passion of mine that I 
+      picked up when I started college in January 2024, and since then I've found ways to capture 
+      whatever caught my eye, from race cars, portraits of my peers, and Mother Nature in all her glory.
+
+      What drives me as a photographer is the joy that I can bring through great photos. I truly believe
+      that a great photo can make someone's day better, and whether I am taking pictures on my own or for
+      clients, I always ask myself "What about this photo stands out enough to make someone stop for a few seconds
+      and admire it?"
+
+      I achieve this through constant communication
+    </p>
+    <p class="about-body">
+      My work spans the quiet intimacy of portraiture, the vast silence of landscapes,
+      the energy of live events, and the raw speed of motorsport. Each genre demands
+      a different eye — and I bring the same dedication and attention to each one.
+    </p>
+    <p class="about-body">
+      Based across wherever the light takes me, I'm available for commissions, collaborations,
+      and personal projects.
+    </p>
+    <a href="https://instagram.com/eyes_of_sai" class="about-instagram" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/>
+      </svg>
+      @eyes_of_sai
+    </a>
+  </div>
+  <div class="about-right">
+    <div class="about-img-block">
+      <div class="ph" style="background: #2a2926;">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span>Photo here</span>
+      </div>
+    </div>
+    <div class="about-img-block" style="background: #232220;">
+      <div class="ph" style="background: #232220;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      </div>
+    </div>
+    <div class="about-img-block" style="background: #1e1d1b;">
+      <div class="ph" style="background: #1e1d1b;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- GENRES PREVIEW -->
+<section class="genres">
+  <div class="genres-header">
+    <h2 class="genres-title">The work I <em>do.</em></h2>
+    <a href="gallery.html" class="genres-link">View full portfolio →</a>
+  </div>
+  <div class="genres-grid">
+    <a href="gallery.html#portraits" class="genre-card">
+      <div class="genre-img-bg" style="background: #2e2b27;">
+        <div class="ph">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </div>
+      </div>
+      <div class="genre-overlay">
+        <span class="genre-overlay-label">View gallery</span>
+        <div class="genre-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <div class="genre-footer">
+        <div class="genre-name">Portraits</div>
+        <div class="genre-count">People &amp; Identity</div>
+      </div>
+    </a>
+    <a href="gallery.html#landscape" class="genre-card">
+      <div class="genre-img-bg" style="background: #252b28;">
+        <div class="ph">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M3 17l4-8 4 5 3-3 7 6"/><path d="M3 20h18"/></svg>
+        </div>
+      </div>
+      <div class="genre-overlay">
+        <span class="genre-overlay-label">View gallery</span>
+        <div class="genre-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <div class="genre-footer">
+        <div class="genre-name">Landscape</div>
+        <div class="genre-count">Nature &amp; Wilderness</div>
+      </div>
+    </a>
+    <a href="gallery.html#events" class="genre-card">
+      <div class="genre-img-bg" style="background: #28252a;">
+        <div class="ph">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+        </div>
+      </div>
+      <div class="genre-overlay">
+        <span class="genre-overlay-label">View gallery</span>
+        <div class="genre-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <div class="genre-footer">
+        <div class="genre-name">Events</div>
+        <div class="genre-count">Live Moments</div>
+      </div>
+    </a>
+    <a href="gallery.html#motorsport" class="genre-card">
+      <div class="genre-img-bg" style="background: #2a2622;">
+        <div class="ph">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M5 12h14M12 5l7 7-7 7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+        </div>
+      </div>
+      <div class="genre-overlay">
+        <span class="genre-overlay-label">View gallery</span>
+        <div class="genre-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+      <div class="genre-footer">
+        <div class="genre-name">Motorsport</div>
+        <div class="genre-count">Speed &amp; Precision</div>
+      </div>
+    </a>
+  </div>
+</section>
+ 
+<!-- PROCESS -->
+<section class="process">
+  <div class="process-header">
+    <span class="section-label">How it works</span>
+    <h2 class="process-title">A simple, <em>human</em> process.</h2>
+  </div>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-title">Reach out</div>
+      <p class="step-desc">Tell me about your vision, the occasion, and what you're hoping to capture. No idea is too small or too ambitious.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-title">We connect</div>
+      <p class="step-desc">We'll discuss the details — location, timing, style — and build a plan that works around you.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-title">Delivered beautifully</div>
+      <p class="step-desc">Your images are carefully edited and delivered in full resolution, ready to share, print, or keep forever.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CTA -->
+<section class="cta-strip">
+  <h2 class="cta-strip-title">Let's make something <em>beautiful.</em></h2>
+  <p class="cta-strip-sub">Whether you have a clear brief or just a feeling — I'd love to hear from you.</p>
+  <a href="contact.html" class="btn-accent">Get in touch</a>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Eyes of Sai</span>
+  <span class="footer-copy">© 2025 Saikrishna Sunkara. All rights reserved.</span>
+  <a href="https://instagram.com/eyes_of_sai" class="footer-social" target="_blank">@eyes_of_sai</a>
+</footer>
+ 
+</body>
+</html>
