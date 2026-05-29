@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Eyes of Sai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f5f2ec;
+    --ink: #1a1916;
+    --ink-soft: #4a4843;
+    --ink-faint: #9a9890;
+    --accent: #c8a96e;
+    --accent-light: #e8dcc8;
+    --white: #ffffff;
+    --border: rgba(26,25,22,0.1);
+    --border-focus: rgba(200,169,110,0.5);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: rgba(245,242,236,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; letter-spacing: 0.08em; color: var(--ink); text-decoration: none; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--ink); border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+  /* LAYOUT */
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    padding-top: 5rem;
+  }
+
+  /* LEFT PANEL */
+  .contact-left {
+    background: var(--ink);
+    padding: 6rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: sticky;
+    top: 5rem;
+    height: calc(100vh - 5rem);
+  }
+
+  .contact-eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+  .contact-title em { font-style: italic; color: var(--accent); }
+
+  .contact-desc {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(245,242,236,0.6);
+    max-width: 380px;
+    margin-bottom: 3rem;
+  }
+
+  .contact-details { display: flex; flex-direction: column; gap: 1rem; }
+
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .detail-icon {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(245,242,236,0.15);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .detail-icon svg { width: 15px; height: 15px; stroke: var(--accent); }
+
+  .detail-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.35);
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+
+  .detail-value {
+    font-size: 0.88rem;
+    color: rgba(245,242,236,0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  a.detail-value:hover { color: var(--accent); }
+
+  .contact-tagline {
+    margin-top: auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(245,242,236,0.2);
+    padding-top: 3rem;
+  }
+
+  /* RIGHT PANEL — FORM */
+  .contact-right {
+    padding: 7rem 4rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .form-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.75rem;
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-subheading {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.55rem;
+  }
+
+  .form-label .required { color: var(--accent); margin-left: 2px; }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 0.85rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--border-focus);
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder { color: var(--ink-faint); }
+
+  .form-select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239a9890' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+
+  .form-textarea { resize: vertical; min-height: 130px; line-height: 1.65; }
+
+  /* GENRE CHECKBOXES */
+  .genre-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    margin-top: 0.2rem;
+  }
+
+  .genre-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    cursor: pointer;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border);
+    background: var(--white);
+    transition: border-color 0.2s, background 0.2s;
+    user-select: none;
+  }
+
+  .genre-checkbox:hover { border-color: rgba(200,169,110,0.35); }
+  .genre-checkbox.checked { border-color: var(--accent); background: #fdf8f1; }
+
+  .genre-checkbox input[type="checkbox"] { display: none; }
+
+  .check-box {
+    width: 16px; height: 16px;
+    border: 1px solid var(--border);
+    background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .genre-checkbox.checked .check-box {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .check-mark {
+    width: 8px; height: 8px;
+    display: none;
+  }
+
+  .genre-checkbox.checked .check-mark { display: block; }
+
+  .genre-label {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.03em;
+  }
+
+  /* SUBMIT */
+  .form-submit-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+  }
+
+  .form-note {
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+  }
+
+  .btn-submit {
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    padding: 1rem 2.8rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    font-weight: 500;
+  }
+
+  .btn-submit:hover { background: var(--ink-soft); transform: translateY(-1px); }
+  .btn-submit:active { transform: translateY(0); }
+
+  /* SUCCESS STATE */
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .success-icon {
+    width: 56px; height: 56px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem;
+  }
+
+  .success-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+  .success-title em { font-style: italic; }
+
+  .success-msg {
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    line-height: 1.7;
+    max-width: 380px;
+    margin: 0 auto 2rem;
+  }
+
+  .btn-back {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2.5rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    background: var(--cream);
+  }
+
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--ink); }
+  .footer-copy { font-size: 0.75rem; color: var(--ink-faint); }
+  .footer-social { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .footer-social:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Eyes of Sai</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gallery.html">Portfolio</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="contact-wrapper">
+
+  <!-- LEFT -->
+  <div class="contact-left">
+    <p class="contact-eyebrow">Let's work together</p>
+    <h1 class="contact-title">Tell me<br/>about your<br/><em>project.</em></h1>
+    <p class="contact-desc">
+      Whether you need portraits, have a landscape shoot in mind, want event coverage,
+      or you're looking for trackside motorsport photography — I'd love to hear from you.
+    </p>
+    <div class="contact-details">
+      <div class="contact-detail">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg>
+        </div>
+        <div>
+          <span class="detail-label">Instagram</span>
+          <a href="https://instagram.com/eyes_of_sai" target="_blank" class="detail-value">@eyes_of_sai</a>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 4h16v16H4z" stroke-width="0"/><rect x="4" y="4" width="16" height="16" rx="2" stroke-width="1.5"/><path d="M4 8l8 5 8-5" stroke-width="1.5"/></svg>
+        </div>
+        <div>
+          <span class="detail-label">Email</span>
+          <span class="detail-value">Via the form →</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <span class="detail-label">Response time</span>
+          <span class="detail-value">Within 48 hours</span>
+        </div>
+      </div>
+    </div>
+    <p class="contact-tagline">"Every frame is a decision."</p>
+  </div>
+
+  <!-- RIGHT FORM -->
+  <div class="contact-right">
+    <div id="form-container">
+      <h2 class="form-heading">Send a request</h2>
+      <p class="form-subheading">Fill in the details below and I'll get back to you as soon as possible.</p>
+
+      <form id="contact-form" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First name <span class="required">*</span></label>
+            <input type="text" class="form-input" placeholder="Alex" id="fname" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last name <span class="required">*</span></label>
+            <input type="text" class="form-input" placeholder="Jordan" id="lname" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email address <span class="required">*</span></label>
+          <input type="email" class="form-input" placeholder="your@email.com" id="email" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Phone number</label>
+          <input type="tel" class="form-input" placeholder="+1 (555) 000-0000" id="phone" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Type of service <span class="required">*</span></label>
+          <select class="form-select" id="service" required>
+            <option value="" disabled selected>Select a service</option>
+            <option value="portraits">Portraits</option>
+            <option value="landscape">Landscape / Nature</option>
+            <option value="events">Events</option>
+            <option value="motorsport">Motorsport</option>
+            <option value="multiple">Multiple / Not sure yet</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Preferred date</label>
+            <input type="date" class="form-input" id="date" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Location / City</label>
+            <input type="text" class="form-input" placeholder="e.g. New York, NY" id="location" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Budget range</label>
+          <select class="form-select" id="budget">
+            <option value="" disabled selected>Select a range</option>
+            <option value="under500">Under $500</option>
+            <option value="500-1000">$500 – $1,000</option>
+            <option value="1000-2500">$1,000 – $2,500</option>
+            <option value="2500-5000">$2,500 – $5,000</option>
+            <option value="5000+">$5,000+</option>
+            <option value="discuss">Let's discuss</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">How did you hear about me?</label>
+          <select class="form-select" id="source">
+            <option value="" disabled selected>Select an option</option>
+            <option value="instagram">Instagram (@eyes_of_sai)</option>
+            <option value="referral">Referral / Word of mouth</option>
+            <option value="google">Google search</option>
+            <option value="portfolio">Saw my work at an event</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Tell me about your project <span class="required">*</span></label>
+          <textarea class="form-textarea" id="message" placeholder="Describe what you have in mind — the occasion, the feel you're going for, any specific ideas..." required></textarea>
+        </div>
+
+        <div class="form-submit-row">
+          <span class="form-note">* Required fields</span>
+          <button type="submit" class="btn-submit">Send request</button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="form-success" id="form-success">
+      <div class="success-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h3 class="success-title">Message <em>received.</em></h3>
+      <p class="success-msg">Thank you for reaching out. I'll review your request and get back to you within 48 hours to discuss the details.</p>
+      <button class="btn-back" onclick="resetForm()">Send another request</button>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="footer-logo">Eyes of Sai</span>
+  <span class="footer-copy">© 2025 Saikrishna Sunkara. All rights reserved.</span>
+  <a href="https://instagram.com/eyes_of_sai" class="footer-social" target="_blank">@eyes_of_sai</a>
+</footer>
+
+<script>
+  // Genre checkbox logic
+  document.querySelectorAll('.genre-checkbox').forEach(label => {
+    label.addEventListener('click', () => {
+      label.classList.toggle('checked');
+      const cb = label.querySelector('input[type="checkbox"]');
+      if (cb) cb.checked = label.classList.contains('checked');
+    });
+  });
+
+  // Form submission
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const fname = document.getElementById('fname').value.trim();
+    const lname = document.getElementById('lname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const service = document.getElementById('service').value;
+    const message = document.getElementById('message').value.trim();
+
+    if (!fname || !lname || !email || !service || !message) {
+      const btn = document.querySelector('.btn-submit');
+      btn.textContent = 'Please fill required fields';
+      btn.style.background = '#9a9890';
+      setTimeout(() => {
+        btn.textContent = 'Send request';
+        btn.style.background = '';
+      }, 2200);
+      return;
+    }
+
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRe.test(email)) {
+      document.getElementById('email').style.borderColor = '#c0392b';
+      document.getElementById('email').focus();
+      return;
+    }
+
+    // Show success
+    document.getElementById('form-container').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  function resetForm() {
+    document.getElementById('contact-form').reset();
+    document.getElementById('form-container').style.display = 'block';
+    document.getElementById('form-success').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
