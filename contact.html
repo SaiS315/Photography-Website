@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Contact — Eyes of Sai</title>
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -210,58 +211,6 @@
 
   .form-textarea { resize: vertical; min-height: 130px; line-height: 1.65; }
 
-  /* GENRE CHECKBOXES */
-  .genre-options {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.6rem;
-    margin-top: 0.2rem;
-  }
-
-  .genre-checkbox {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    cursor: pointer;
-    padding: 0.7rem 1rem;
-    border: 1px solid var(--border);
-    background: var(--white);
-    transition: border-color 0.2s, background 0.2s;
-    user-select: none;
-  }
-
-  .genre-checkbox:hover { border-color: rgba(200,169,110,0.35); }
-  .genre-checkbox.checked { border-color: var(--accent); background: #fdf8f1; }
-
-  .genre-checkbox input[type="checkbox"] { display: none; }
-
-  .check-box {
-    width: 16px; height: 16px;
-    border: 1px solid var(--border);
-    background: var(--white);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: background 0.15s, border-color 0.15s;
-  }
-
-  .genre-checkbox.checked .check-box {
-    background: var(--accent);
-    border-color: var(--accent);
-  }
-
-  .check-mark {
-    width: 8px; height: 8px;
-    display: none;
-  }
-
-  .genre-checkbox.checked .check-mark { display: block; }
-
-  .genre-label {
-    font-size: 0.8rem;
-    color: var(--ink-soft);
-    letter-spacing: 0.03em;
-  }
-
   /* SUBMIT */
   .form-submit-row {
     display: flex;
@@ -412,79 +361,83 @@
       <p class="form-subheading">Fill in the details below and I'll get back to you as soon as possible.</p>
 
       <form id="contact-form" novalidate>
+        
+        <!-- Web3Forms Access Key -->
+        <input type="hidden" name="access_key" value="ea16d851-3919-43f2-ad4e-b5bf945d388a">
+        <input type="hidden" name="subject" value="Photography Page Form">
 
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">First name <span class="required">*</span></label>
-            <input type="text" class="form-input" placeholder="Alex" id="fname" required />
+            <input type="text" class="form-input" placeholder="Alex" id="fname" name="First Name" required />
           </div>
           <div class="form-group">
             <label class="form-label">Last name <span class="required">*</span></label>
-            <input type="text" class="form-input" placeholder="Jordan" id="lname" required />
+            <input type="text" class="form-input" placeholder="Jordan" id="lname" name="Last Name" required />
           </div>
         </div>
 
         <div class="form-group">
           <label class="form-label">Email address <span class="required">*</span></label>
-          <input type="email" class="form-input" placeholder="your@email.com" id="email" required />
+          <input type="email" class="form-input" placeholder="your@email.com" id="email" name="Email" required />
         </div>
 
         <div class="form-group">
           <label class="form-label">Phone number</label>
-          <input type="tel" class="form-input" placeholder="+1 (555) 000-0000" id="phone" />
+          <input type="tel" class="form-input" placeholder="+1 (555) 000-0000" id="phone" name="Phone Number" />
         </div>
 
         <div class="form-group">
           <label class="form-label">Type of service <span class="required">*</span></label>
-          <select class="form-select" id="service" required>
+          <select class="form-select" id="service" name="Service Type" required>
             <option value="" disabled selected>Select a service</option>
-            <option value="portraits">Portraits</option>
-            <option value="landscape">Landscape / Nature</option>
-            <option value="events">Events</option>
-            <option value="motorsport">Motorsport</option>
-            <option value="multiple">Multiple / Not sure yet</option>
+            <option value="Portraits">Portraits</option>
+            <option value="Landscape">Landscape / Nature</option>
+            <option value="Events">Events</option>
+            <option value="Motorsport">Motorsport</option>
+            <option value="Multiple/Unsure">Multiple / Not sure yet</option>
           </select>
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Preferred date</label>
-            <input type="date" class="form-input" id="date" />
+            <input type="date" class="form-input" id="date" name="Preferred Date" />
           </div>
           <div class="form-group">
             <label class="form-label">Location / City</label>
-            <input type="text" class="form-input" placeholder="e.g. New York, NY" id="location" />
+            <input type="text" class="form-input" placeholder="e.g. New York, NY" id="location" name="Location" />
           </div>
         </div>
 
         <div class="form-group">
           <label class="form-label">Budget range</label>
-          <select class="form-select" id="budget">
+          <select class="form-select" id="budget" name="Budget Range">
             <option value="" disabled selected>Select a range</option>
-            <option value="under500">Under $500</option>
-            <option value="500-1000">$500 – $1,000</option>
-            <option value="1000-2500">$1,000 – $2,500</option>
-            <option value="2500-5000">$2,500 – $5,000</option>
-            <option value="5000+">$5,000+</option>
-            <option value="discuss">Let's discuss</option>
+            <option value="Under $500">Under $500</option>
+            <option value="$500-$1000">$500 – $1,000</option>
+            <option value="$1000-$2500">$1,000 – $2,500</option>
+            <option value="$2500-$5000">$2,500 – $5,000</option>
+            <option value="$5000+">$5,000+</option>
+            <option value="Let's discuss">Let's discuss</option>
           </select>
         </div>
 
         <div class="form-group">
           <label class="form-label">How did you hear about me?</label>
-          <select class="form-select" id="source">
+          <select class="form-select" id="source" name="Referral Source">
             <option value="" disabled selected>Select an option</option>
-            <option value="instagram">Instagram (@eyes_of_sai)</option>
-            <option value="referral">Referral / Word of mouth</option>
-            <option value="google">Google search</option>
-            <option value="portfolio">Saw my work at an event</option>
-            <option value="other">Other</option>
+            <option value="Instagram">Instagram (@eyes_of_sai)</option>
+            <option value="Referral">Referral / Word of mouth</option>
+            <option value="Google">Google search</option>
+            <option value="Portfolio Event">Saw my work at an event</option>
+            <option value="Other">Other</option>
           </select>
         </div>
 
         <div class="form-group">
           <label class="form-label">Tell me about your project <span class="required">*</span></label>
-          <textarea class="form-textarea" id="message" placeholder="Describe what you have in mind — the occasion, the feel you're going for, any specific ideas..." required></textarea>
+          <textarea class="form-textarea" id="message" name="Message" placeholder="Describe what you have in mind — the occasion, the feel you're going for, any specific ideas..." required></textarea>
         </div>
 
         <div class="form-submit-row">
@@ -517,16 +470,7 @@
 </footer>
 
 <script>
-  // Genre checkbox logic
-  document.querySelectorAll('.genre-checkbox').forEach(label => {
-    label.addEventListener('click', () => {
-      label.classList.toggle('checked');
-      const cb = label.querySelector('input[type="checkbox"]');
-      if (cb) cb.checked = label.classList.contains('checked');
-    });
-  });
-
-  // Form submission
+  // Form submission with Web3Forms Fetch API
   document.getElementById('contact-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -536,6 +480,7 @@
     const service = document.getElementById('service').value;
     const message = document.getElementById('message').value.trim();
 
+    // Basic Validation
     if (!fname || !lname || !email || !service || !message) {
       const btn = document.querySelector('.btn-submit');
       btn.textContent = 'Please fill required fields';
@@ -547,6 +492,7 @@
       return;
     }
 
+    // Email Validation
     const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRe.test(email)) {
       document.getElementById('email').style.borderColor = '#c0392b';
@@ -554,12 +500,55 @@
       return;
     }
 
-    // Show success
-    document.getElementById('form-container').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // 1. Update button state to show it is sending
+    const btn = document.querySelector('.btn-submit');
+    const originalText = btn.textContent;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    // 2. Package the form data for Web3Forms
+    const formData = new FormData(document.getElementById('contact-form'));
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    // 3. Send the request
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: json
+    })
+    .then(async (response) => {
+      let result = await response.json();
+      if (response.status == 200) {
+        // Success! Hide the form and show your custom success screen
+        document.getElementById('form-container').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        console.log(response);
+        alert("Oops! Something went wrong: " + result.message);
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      alert("Oops! Something went wrong submitting your request.");
+    })
+    .finally(() => {
+      // 4. Reset button state regardless of outcome
+      btn.textContent = originalText;
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      
+      // Clear the form fields
+      document.getElementById('contact-form').reset();
+    });
   });
 
+  // Reset form function to return to initial state
   function resetForm() {
     document.getElementById('contact-form').reset();
     document.getElementById('form-container').style.display = 'block';
