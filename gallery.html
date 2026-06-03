@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f5f2ec;
+    --ink: #1a1916;
+    --ink-soft: #4a4843;
+    --ink-faint: #9a9890;
+    --accent: #c8a96e;
+    --accent-light: #e8dcc8;
+    --white: #ffffff;
+    --border: rgba(26,25,22,0.1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: rgba(245,242,236,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--ink); border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: 10rem 4rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.05;
+  }
+  .page-title em { font-style: italic; color: var(--ink-soft); }
+
+  .page-subtitle {
+    font-size: 0.88rem;
+    color: var(--ink-faint);
+    line-height: 1.7;
+    max-width: 300px;
+    text-align: right;
+  }
+
+  /* FILTER TABS */
+  .filters {
+    padding: 0 4rem 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .filter-btn {
+    background: none;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s;
+  }
+
+  .filter-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 1.5rem; right: 1.5rem;
+    height: 1px;
+    background: var(--ink);
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+  }
+
+  .filter-btn:hover { color: var(--ink-soft); }
+  .filter-btn.active { color: var(--ink); }
+  .filter-btn.active::after { transform: scaleX(1); }
+
+  /* GALLERY SECTIONS */
+  .gallery-section {
+    padding: 4rem 4rem 6rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .gallery-section.hidden { display: none; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--ink);
+  }
+  .section-title em { font-style: italic; color: var(--ink-soft); }
+
+  .section-count {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .section-desc {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    max-width: 580px;
+    margin-bottom: 2.5rem;
+  }
+
+  /* MASONRY-STYLE GRID */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+
+  .photo-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+  .photo-grid.four-col { grid-template-columns: repeat(4, 1fr); }
+
+  .photo-item {
+    position: relative;
+    overflow: hidden;
+    background: var(--ink-soft);
+    cursor: pointer;
+  }
+
+  .photo-item.tall { aspect-ratio: 2/3; }
+  .photo-item.wide { aspect-ratio: 16/9; }
+  .photo-item.square { aspect-ratio: 1/1; }
+  .photo-item.portrait { aspect-ratio: 3/4; }
+
+  .photo-item:hover .photo-hover { opacity: 1; }
+  .photo-item:hover .photo-bg { transform: scale(1.03); }
+
+  .photo-bg {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.5s ease;
+  }
+
+  .photo-hover {
+    position: absolute; inset: 0;
+    background: rgba(26,25,22,0.38);
+    opacity: 0;
+    transition: opacity 0.35s;
+    display: flex;
+    align-items: flex-end;
+    padding: 1.25rem;
+  }
+
+  .photo-caption {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.75);
+  }
+
+  .ph-img {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    width: 100%; height: 100%;
+    gap: 0.4rem;
+  }
+  .ph-img svg { opacity: 0.15; }
+  .ph-img span {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(245,242,236,0.2);
+  }
+
+  /* Varied backgrounds for visual depth */
+  .bg-1 { background: #2e2b27; }
+  .bg-2 { background: #252a26; }
+  .bg-3 { background: #27252a; }
+  .bg-4 { background: #2a2420; }
+  .bg-5 { background: #232629; }
+  .bg-6 { background: #28262a; }
+  .bg-7 { background: #1e2220; }
+  .bg-8 { background: #2c2822; }
+  .bg-9 { background: #202427; }
+
+  /* SECTION DIVIDER */
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0 4rem;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2.5rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    background: var(--cream);
+    margin-top: 4rem;
+  }
+
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--ink); letter-spacing: 0.05em; }
+  .footer-copy { font-size: 0.75rem; color: var(--ink-faint); }
+  .footer-social { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .footer-social:hover { color: var(--accent); }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .gallery-section { animation: fadeIn 0.4s ease; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Eyes of Sai</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gallery.html" class="active">Portfolio</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <h1 class="page-title">The <em>full</em><br/>portfolio.</h1>
+  <p class="page-subtitle">Four distinct disciplines.<br/>One coherent vision.</p>
+</div>
+
+<div class="filters" id="filters">
+  <button class="filter-btn active" data-filter="all">All work</button>
+  <button class="filter-btn" data-filter="portraits">Portraits</button>
+  <button class="filter-btn" data-filter="landscape">Landscape</button>
+  <button class="filter-btn" data-filter="events">Events</button>
+  <button class="filter-btn" data-filter="motorsport">Motorsport</button>
+</div>
+
+<!-- PORTRAITS -->
+<section class="gallery-section" id="portraits" data-section="portraits">
+  <div class="section-header">
+    <h2 class="section-title"><em>Portraits</em></h2>
+    <span class="section-count">People &amp; Identity</span>
+  </div>
+  <p class="section-desc">
+    Portraits are an act of trust. I strive to create a space where the subject feels
+    seen — and the resulting images reflect something genuinely true about who they are.
+  </p>
+  <div class="photo-grid">
+    <div class="photo-item tall bg-1">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Portrait</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Natural light · Studio</span></div>
+    </div>
+    <div class="photo-item portrait bg-2">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Portrait</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Environmental portrait</span></div>
+    </div>
+    <div class="photo-item portrait bg-3">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Portrait</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Golden hour</span></div>
+    </div>
+    <div class="photo-item portrait bg-5">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Portrait</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Candid</span></div>
+    </div>
+    <div class="photo-item tall bg-6">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Portrait</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Fashion</span></div>
+    </div>
+    <div class="photo-item portrait bg-7">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Portrait</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Monochrome</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- LANDSCAPE -->
+<section class="gallery-section" id="landscape" data-section="landscape">
+  <div class="section-header">
+    <h2 class="section-title"><em>Landscape</em></h2>
+    <span class="section-count">Nature &amp; Wilderness</span>
+  </div>
+  <p class="section-desc">
+    The land is endlessly patient. I try to meet it on its own terms — returning
+    again and again until the light, the weather, and the moment align into something worth keeping.
+  </p>
+  <div class="photo-grid four-col">
+    <div class="photo-item square bg-2">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M3 17l4-8 4 5 3-3 7 6"/></svg><span>Landscape</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Mountains</span></div>
+    </div>
+    <div class="photo-item square bg-4">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M3 17l4-8 4 5 3-3 7 6"/></svg><span>Landscape</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Coastal</span></div>
+    </div>
+    <div class="photo-item square bg-7">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M3 17l4-8 4 5 3-3 7 6"/></svg><span>Landscape</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Forest</span></div>
+    </div>
+    <div class="photo-item square bg-9">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M3 17l4-8 4 5 3-3 7 6"/></svg><span>Landscape</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Desert</span></div>
+    </div>
+    <div class="photo-item wide bg-3" style="grid-column: span 2;">
+      <div class="photo-bg" style="aspect-ratio:16/7;"><div class="ph-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M3 17l4-8 4 5 3-3 7 6"/></svg><span>Panoramic</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Panoramic vista</span></div>
+    </div>
+    <div class="photo-item wide bg-6" style="grid-column: span 2;">
+      <div class="photo-bg" style="aspect-ratio:16/7;"><div class="ph-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M3 17l4-8 4 5 3-3 7 6"/></svg><span>Panoramic</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Sunrise · Dusk</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- EVENTS -->
+<section class="gallery-section" id="events" data-section="events">
+  <div class="section-header">
+    <h2 class="section-title"><em>Events</em></h2>
+    <span class="section-count">Live Moments</span>
+  </div>
+  <p class="section-desc">
+    Events are unpredictable, layered, and alive. My job is to stay ready — to be
+    invisible when needed and present when the moment demands it.
+  </p>
+  <div class="photo-grid">
+    <div class="photo-item square bg-4">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg><span>Event</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Ceremony</span></div>
+    </div>
+    <div class="photo-item tall bg-8">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg><span>Event</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Concert · Performance</span></div>
+    </div>
+    <div class="photo-item square bg-5">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg><span>Event</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Corporate</span></div>
+    </div>
+    <div class="photo-item portrait bg-2">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg><span>Event</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Candid moments</span></div>
+    </div>
+    <div class="photo-item portrait bg-6">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg><span>Event</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Social events</span></div>
+    </div>
+    <div class="photo-item square bg-9">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg><span>Event</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Celebrations</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- MOTORSPORT -->
+<section class="gallery-section" id="motorsport" data-section="motorsport">
+  <div class="section-header">
+    <h2 class="section-title"><em>Motorsport</em></h2>
+    <span class="section-count">Speed &amp; Precision</span>
+  </div>
+  <p class="section-desc">
+    Shooting motorsport is a study in anticipation. Every corner is a chance — to freeze
+    the blur, capture the grit, and tell the story of machines and the humans who drive them.
+  </p>
+  <div class="photo-grid two-col">
+    <div class="photo-item wide bg-4" style="aspect-ratio:16/9;">
+      <div class="photo-bg"><div class="ph-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M5 17h2l1-3h8l1 3h2"/><rect x="3" y="11" width="18" height="6" rx="1"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Motorsport</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Circuit racing</span></div>
+    </div>
+    <div class="photo-item wide bg-8" style="aspect-ratio:16/9;">
+      <div class="photo-bg"><div class="ph-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M5 17h2l1-3h8l1 3h2"/><rect x="3" y="11" width="18" height="6" rx="1"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Motorsport</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Pit lane</span></div>
+    </div>
+    <div class="photo-item portrait bg-3">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M5 17h2l1-3h8l1 3h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Motorsport</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Driver portrait</span></div>
+    </div>
+    <div class="photo-item portrait bg-7">
+      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M5 17h2l1-3h8l1 3h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Motorsport</span></div></div>
+      <div class="photo-hover"><span class="photo-caption">Action · Detail</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">Eyes of Sai</span>
+  <span class="footer-copy">© 2025 Saikrishna Sunkara. All rights reserved.</span>
+  <a href="https://instagram.com/eyes_of_sai" class="footer-social" target="_blank">@eyes_of_sai</a>
+</footer>
+
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const sections = document.querySelectorAll('.gallery-section');
+  const dividers = document.querySelectorAll('.section-divider');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+
+      sections.forEach(sec => {
+        if (filter === 'all' || sec.dataset.section === filter) {
+          sec.classList.remove('hidden');
+        } else {
+          sec.classList.add('hidden');
+        }
+      });
+
+      dividers.forEach(d => {
+        d.style.display = filter === 'all' ? 'block' : 'none';
+      });
+    });
+  });
+
+  // Hash-based deep linking
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    const btn = document.querySelector(`[data-filter="${hash}"]`);
+    if (btn) btn.click();
+  }
+</script>
+</body>
+</html>
