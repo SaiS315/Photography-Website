@@ -181,12 +181,23 @@
   }
 
   .photo-item.tall { aspect-ratio: 2/3; }
-  .photo-item.wide { aspect-ratio: 16/9; }
+  .photo-item.wide { aspect-ratio: 3/2; }
   .photo-item.square { aspect-ratio: 1/1; }
   .photo-item.portrait { aspect-ratio: 3/4; }
 
+  #portraits .photo-item {
+    aspect-ratio: 2/3;
+  }
+
   .photo-item:hover .photo-hover { opacity: 1; }
   .photo-item:hover .photo-bg { transform: scale(1.03); }
+
+  .photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
   .photo-bg {
     width: 100%; height: 100%;
@@ -298,13 +309,13 @@
     seen — and the resulting images reflect something genuinely true about who they are.
   </p>
   <div class="photo-grid">
-    <div class="photo-item tall bg-1">
-      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Portrait</span></div></div>
-      <div class="photo-hover"><span class="photo-caption">Natural light · Studio</span></div>
+    <div class="photo-item portrait bg-1">
+      <img src="images/IMG_4633.jpg" alt="Portrait" style="width:100%;height:100%;object-fit:cover;display:block;" />
+      <div class="photo-hover"><span class="photo-caption">Graduation</span></div>
     </div>
     <div class="photo-item portrait bg-2">
-      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Portrait</span></div></div>
-      <div class="photo-hover"><span class="photo-caption">Environmental portrait</span></div>
+      <img src="images/IMG_4633.jpg" alt="Portrait" style="width:100%;height:100%;object-fit:cover;display:block;" />
+      <div class="photo-hover"><span class="photo-caption">Graduation</span></div>
     </div>
     <div class="photo-item portrait bg-3">
       <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Portrait</span></div></div>
@@ -314,7 +325,7 @@
       <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Portrait</span></div></div>
       <div class="photo-hover"><span class="photo-caption">Candid</span></div>
     </div>
-    <div class="photo-item tall bg-6">
+    <div class="photo-item portrait bg-6">
       <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Portrait</span></div></div>
       <div class="photo-hover"><span class="photo-caption">Fashion</span></div>
     </div>
@@ -338,29 +349,29 @@
     again and again until the light, the weather, and the moment align into something worth keeping.
   </p>
   <div class="photo-grid four-col">
-    <div class="photo-item square bg-2">
-      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M3 17l4-8 4 5 3-3 7 6"/></svg><span>Landscape</span></div></div>
-      <div class="photo-hover"><span class="photo-caption">Mountains</span></div>
+    <div class="photo-item tall bg-2">
+      <div class="photo-bg"><img src="images/IMG_9536.jpg" alt="Snow" /></div>
+      <div class="photo-hover"><span class="photo-caption">Winter</span></div>
     </div>
-    <div class="photo-item square bg-4">
-      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M3 17l4-8 4 5 3-3 7 6"/></svg><span>Landscape</span></div></div>
+    <div class="photo-item tall bg-4">
+      <div class="photo-bg"><img src="images/IMG_9792.jpg" alt="Coastal" /></div>
       <div class="photo-hover"><span class="photo-caption">Coastal</span></div>
     </div>
-    <div class="photo-item square bg-7">
-      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M3 17l4-8 4 5 3-3 7 6"/></svg><span>Landscape</span></div></div>
-      <div class="photo-hover"><span class="photo-caption">Forest</span></div>
+    <div class="photo-item tall bg-7">
+      <div class="photo-bg"><img src="images/IMG_9616.jpg" alt="Sunset" /></div>
+      <div class="photo-hover"><span class="photo-caption">Local Sunset</span></div>
     </div>
-    <div class="photo-item square bg-9">
-      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M3 17l4-8 4 5 3-3 7 6"/></svg><span>Landscape</span></div></div>
-      <div class="photo-hover"><span class="photo-caption">Desert</span></div>
+    <div class="photo-item tall bg-9">
+      <div class="photo-bg"><img src="images/IMG_5233.jpg" alt="Sunset" /></div>
+      <div class="photo-hover"><span class="photo-caption">Lakeside</span></div>
     </div>
     <div class="photo-item wide bg-3" style="grid-column: span 2;">
-      <div class="photo-bg" style="aspect-ratio:16/7;"><div class="ph-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M3 17l4-8 4 5 3-3 7 6"/></svg><span>Panoramic</span></div></div>
-      <div class="photo-hover"><span class="photo-caption">Panoramic vista</span></div>
+      <div class="photo-bg"><img src="images/IMG_8006.jpg" alt="Mem U" /></div>
+      <div class="photo-hover"><span class="photo-caption">Memorial Union</span></div>
     </div>
     <div class="photo-item wide bg-6" style="grid-column: span 2;">
-      <div class="photo-bg" style="aspect-ratio:16/7;"><div class="ph-img"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><path d="M3 17l4-8 4 5 3-3 7 6"/></svg><span>Panoramic</span></div></div>
-      <div class="photo-hover"><span class="photo-caption">Sunrise · Dusk</span></div>
+      <div class="photo-bg"><img src="images/IMG_6039.jpg" alt="Natural Bridges" /></div>
+      <div class="photo-hover"><span class="photo-caption">Natural Bridges</span></div>
     </div>
   </div>
 </section>
@@ -438,8 +449,8 @@
 </section>
 
 <footer>
-  <span class="footer-logo">Eyes of Sai</span>
-  <span class="footer-copy">© 2025 Saikrishna Sunkara. All rights reserved.</span>
+  <span class="footer-logo">Saikrishna Sunkara</span>
+  <span class="footer-copy">© 2026 Saikrishna Sunkara. All rights reserved.</span>
   <a href="https://instagram.com/eyes_of_sai" class="footer-social" target="_blank">@eyes_of_sai</a>
 </footer>
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Contact Me</title>
+<title>Contact — Eyes of Sai</title>
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -314,7 +314,6 @@
 
 <div class="contact-wrapper">
 
-  <!-- LEFT -->
   <div class="contact-left">
     <p class="contact-eyebrow">Let's work together</p>
     <h1 class="contact-title">Tell me<br/>about your<br/><em>project.</em></h1>
@@ -354,7 +353,6 @@
     <p class="contact-tagline">"Every frame is a decision."</p>
   </div>
 
-  <!-- RIGHT FORM -->
   <div class="contact-right">
     <div id="form-container">
       <h2 class="form-heading">Send a request</h2>
@@ -362,9 +360,7 @@
 
       <form id="contact-form" novalidate>
         
-        <!-- Web3Forms Access Key -->
-        <input type="hidden" name="access_key" value="ea16d851-3919-43f2-ad4e-b5bf945d388a">
-        <input type="hidden" name="subject" value="Photography Page Form">
+        <input type="hidden" name="subject" value="New Portfolio Inquiry from Eyes of Sai">
 
         <div class="form-row">
           <div class="form-group">
@@ -448,7 +444,6 @@
       </form>
     </div>
 
-    <!-- SUCCESS STATE -->
     <div class="form-success" id="form-success">
       <div class="success-icon">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5">
@@ -464,13 +459,13 @@
 </div>
 
 <footer>
-  <span class="footer-logo">Eyes of Sai</span>
-  <span class="footer-copy">© 2025 Saikrishna Sunkara. All rights reserved.</span>
+  <span class="footer-logo">Saikrishna Sunkara</span>
+  <span class="footer-copy">© 2026 Saikrishna Sunkara. All rights reserved.</span>
   <a href="https://instagram.com/eyes_of_sai" class="footer-social" target="_blank">@eyes_of_sai</a>
 </footer>
 
 <script>
-  // Form submission with Web3Forms Fetch API
+  // Form submission routed to local Netlify Function
   document.getElementById('contact-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -507,13 +502,13 @@
     btn.disabled = true;
     btn.style.opacity = '0.7';
 
-    // 2. Package the form data for Web3Forms
+    // 2. Package the form data
     const formData = new FormData(document.getElementById('contact-form'));
     const object = Object.fromEntries(formData);
     const json = JSON.stringify(object);
 
-    // 3. Send the request
-    fetch("https://api.web3forms.com/submit", {
+    // 3. Send the request to your backend function instead of Web3Forms directly
+    fetch("/.netlify/functions/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
