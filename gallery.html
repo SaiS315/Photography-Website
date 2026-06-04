@@ -170,6 +170,10 @@
     gap: 3px;
   }
 
+  #portraits .photo-grid.four-col {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
   .photo-grid.two-col { grid-template-columns: repeat(2, 1fr); }
   .photo-grid.four-col { grid-template-columns: repeat(4, 1fr); }
 
@@ -187,6 +191,10 @@
 
   #portraits .photo-item {
     aspect-ratio: 2/3;
+  }
+
+  #portraits .photo-item.wide {
+    aspect-ratio: 3/2;
   }
 
   .photo-item:hover .photo-hover { opacity: 1; }
@@ -286,8 +294,8 @@
 </nav>
 
 <div class="page-header">
-  <h1 class="page-title">The <em>full</em><br/>portfolio.</h1>
-  <p class="page-subtitle">Four distinct disciplines.<br/>One coherent vision.</p>
+  <h1 class="page-title">My <em>Portfolio</em><br/>.</h1>
+  <p class="page-subtitle">To see all of my best work, <br/>visit and follow @eyes_of_sai on Instagram</p>
 </div>
 
 <div class="filters" id="filters">
@@ -302,36 +310,34 @@
 <section class="gallery-section" id="portraits" data-section="portraits">
   <div class="section-header">
     <h2 class="section-title"><em>Portraits</em></h2>
-    <span class="section-count">People &amp; Identity</span>
   </div>
   <p class="section-desc">
-    Portraits are an act of trust. I strive to create a space where the subject feels
-    seen — and the resulting images reflect something genuinely true about who they are.
+    Whether it's for a club's photoshoot, graduation, Linkedln, you name it, I can do it. 
   </p>
-  <div class="photo-grid">
+  <div class="photo-grid four-col">
     <div class="photo-item portrait bg-1">
       <img src="images/IMG_4633.jpg" alt="Portrait" style="width:100%;height:100%;object-fit:cover;display:block;" />
-      <div class="photo-hover"><span class="photo-caption">Graduation</span></div>
+      <div class="photo-hover"><span class="photo-caption">Graduation Candid</span></div>
     </div>
     <div class="photo-item portrait bg-2">
-      <img src="images/IMG_4633.jpg" alt="Portrait" style="width:100%;height:100%;object-fit:cover;display:block;" />
-      <div class="photo-hover"><span class="photo-caption">Graduation</span></div>
+      <img src="images/IMG_5909.jpg" alt="Portrait" style="width:100%;height:100%;object-fit:cover;display:block;" />
+      <div class="photo-hover"><span class="photo-caption">Graduation Candid</span></div>
     </div>
     <div class="photo-item portrait bg-3">
-      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Portrait</span></div></div>
-      <div class="photo-hover"><span class="photo-caption">Golden hour</span></div>
+      <img src="images/IMG_8880.jpg" alt="Portrait" style="width:100%;height:100%;object-fit:cover;display:block;" />
+      <div class="photo-hover"><span class="photo-caption">WSB Captain Photo</span></div>
     </div>
     <div class="photo-item portrait bg-5">
-      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Portrait</span></div></div>
+      <img src="images/IMG_4849.jpg" alt="Portrait" style="width:100%;height:100%;object-fit:cover;display:block;" />
       <div class="photo-hover"><span class="photo-caption">Candid</span></div>
     </div>
-    <div class="photo-item portrait bg-6">
-      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Portrait</span></div></div>
-      <div class="photo-hover"><span class="photo-caption">Fashion</span></div>
+    <div class="photo-item wide bg-6" style="grid-column: span 2;">
+      <img src="images/IMG_8355.jpg" alt="Portrait" style="width:100%;height:100%;object-fit:cover;display:block;" />
+      <div class="photo-hover"><span class="photo-caption">Hindu YUVA Board Photoshoot</span></div>
     </div>
-    <div class="photo-item portrait bg-7">
-      <div class="photo-bg"><div class="ph-img"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f5f2ec" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Portrait</span></div></div>
-      <div class="photo-hover"><span class="photo-caption">Monochrome</span></div>
+    <div class="photo-item wide bg-7" style="grid-column: span 2;">
+      <img src="images/IMG_5890.jpg" alt="Portrait" style="width:100%;height:100%;object-fit:cover;display:block;" />
+      <div class="photo-hover"><span class="photo-caption">Graduation Candid</span></div>
     </div>
   </div>
 </section>
@@ -342,11 +348,9 @@
 <section class="gallery-section" id="landscape" data-section="landscape">
   <div class="section-header">
     <h2 class="section-title"><em>Landscape</em></h2>
-    <span class="section-count">Nature &amp; Wilderness</span>
   </div>
   <p class="section-desc">
-    The land is endlessly patient. I try to meet it on its own terms — returning
-    again and again until the light, the weather, and the moment align into something worth keeping.
+    Sometimes the best subject ends up being Mother Nature herself and the surroundings.  
   </p>
   <div class="photo-grid four-col">
     <div class="photo-item tall bg-2">
