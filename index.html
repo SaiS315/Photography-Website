@@ -87,7 +87,7 @@
   
   .hero-title em {
     font-style: italic;
-    color: var(--ink-soft);
+    color: var(--accent);
   }
   
   .hero-ctas { display: flex; gap: 1rem; align-items: center; }
@@ -140,7 +140,7 @@
 
   .hero-img-block.wide {
     grid-column: 1 / 4;
-    aspect-ratio: 16/6; 
+    aspect-ratio: 3 / 2;
   }
   
   .hero-img-block img {
@@ -190,7 +190,7 @@
     margin-bottom: 2rem;
   }
   
-  .about-title em { font-style: italic; color: var(--ink-soft); }
+  .about-title em { font-style: italic; color: var(--accent); }
   
   .about-body {
     font-size: 0.95rem;
@@ -366,8 +366,8 @@
   .step-num {
     font-family: 'Cormorant Garamond', serif;
     font-size: 4rem;
-    font-weight: 300;
-    color: var(--accent-light);
+    font-weight: 600;
+    color: var(--accent);
     line-height: 1;
     margin-bottom: 1rem;
   }
@@ -463,6 +463,16 @@
   .ph { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; gap: 0.5rem; }
   .ph svg { opacity: 0.18; }
   .ph span { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(245,242,236,0.25); }
+  .ph.image-placeholder {
+    border: 1px dashed rgba(245,242,236,0.24);
+    background: rgba(245,242,236,0.06);
+    color: rgba(245,242,236,0.55);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0 1rem;
+  }
   
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
@@ -499,12 +509,12 @@
   <div class="hero-right">
     <div class="hero-img-grid">
       <div class="hero-img-block">
-        <img src="images/IMG_5894.jpg" alt="Portraits"
+        <img src="images/IMG_5822.jpg" alt="Portraits"
              style="width:100%; height:100%; object-fit:cover; object-position:center;" />
         <span class="hero-img-label">Portraits</span>
       </div>
       <div class="hero-img-block">
-        <img src="images/IMG_9723.jpg" alt="Landscape"
+        <img src="images/IMG_5930.jpg" alt="Landscape"
              style="width:100%; height:100%; object-fit:cover; object-position:center 40%;" />
         <span class="hero-img-label">Landscape</span>
       </div>
@@ -514,7 +524,7 @@
         <span class="hero-img-label">Motorsport</span>
       </div>
       <div class="hero-img-block wide">
-        <img src="images/IMG_8514.jpg" alt="Special Events"
+        <img src="images/IMG_8136.jpg" alt="Special Events"
              style="width:100%; height:100%; object-fit:cover; object-position:center 60%;" />
         <span class="hero-img-label">Special Events</span>
       </div>
@@ -553,11 +563,11 @@
   </div>
   <div class="about-right">
     <div class="about-img-block">
-      <img src="images/IMG_9342.jpg"
+      <img src="images/IMG_9321.jpg"
            style="width:100%; height:100%; object-fit:cover; object-position:center;" />
     </div>
     <div class="about-img-block">
-      <img src="images/IMG_1801.jpg"
+      <img src="images/IMG_4829.jpg"
            style="width:100%; height:100%; object-fit:cover; object-position:center;" />
     </div>
     <div class="about-img-block">
@@ -586,7 +596,6 @@
       </div>
       <div class="genre-footer">
         <div class="genre-name">Portraits</div>
-        <div class="genre-count">People &amp; Identity</div>
       </div>
     </a>
     <a href="gallery.html#landscape" class="genre-card">
@@ -601,7 +610,6 @@
       </div>
       <div class="genre-footer">
         <div class="genre-name">Landscape</div>
-        <div class="genre-count">Nature &amp; Wilderness</div>
       </div>
     </a>
     <a href="gallery.html#events" class="genre-card">
@@ -616,7 +624,6 @@
       </div>
       <div class="genre-footer">
         <div class="genre-name">Events</div>
-        <div class="genre-count">Live Moments</div>
       </div>
     </a>
     <a href="gallery.html#motorsport" class="genre-card">
@@ -638,7 +645,6 @@
       </div>
       <div class="genre-footer">
         <div class="genre-name">Motorsport</div>
-        <div class="genre-count">Speed &amp; Precision</div>
       </div>
     </a>
   </div>
