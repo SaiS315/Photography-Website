@@ -6,6 +6,8 @@ and a contact page where one can submit requests to work with me.
 
 This website is now ready to use, and will continue to be edited for my own personal use and for users.
 
+Visit: eyesofsai.netlify.app to check it out!
+
 
 
 # Specifics
