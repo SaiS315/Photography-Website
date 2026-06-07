@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -361,6 +362,8 @@
       <form id="contact-form" novalidate>
         
         <input type="hidden" name="subject" value="New Portfolio Inquiry from Eyes of Sai">
+        
+        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
         <div class="form-row">
           <div class="form-group">
@@ -436,6 +439,10 @@
           <textarea class="form-textarea" id="message" name="Message" placeholder="Describe what you have in mind — the occasion, the feel you're going for, any specific ideas..." required></textarea>
         </div>
 
+        <div class="form-group">
+            <div class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"></div>
+        </div>
+
         <div class="form-submit-row">
           <span class="form-note">* Required fields</span>
           <button type="submit" class="btn-submit">Send request</button>
@@ -465,7 +472,30 @@
 </footer>
 
 <script>
-  // Form submission routed to local Netlify Function
+  // ADDED: Set minimum date dynamically to prevent selecting past dates
+  const dateInput = document.getElementById('date');
+  if (dateInput) {
+    dateInput.min = new Date().toISOString().split("T")[0];
+  }
+
+  // ADDED: Dynamic Input Restrictions
+  // Restrict Names: Allow letters, spaces, hyphens, and apostrophes
+  const nameInputs = document.querySelectorAll('#fname, #lname');
+  nameInputs.forEach(input => {
+    input.addEventListener('input', function() {
+      this.value = this.value.replace(/[^a-zA-Z\s\-']/g, ''); 
+    });
+  });
+
+  // Restrict Phone: Allow numbers, spaces, plus sign, hyphens, and parentheses
+  const phoneInput = document.getElementById('phone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function() {
+      this.value = this.value.replace(/[^0-9+\-()\s]/g, '');
+    });
+  }
+
+  // Form Submission Logic
   document.getElementById('contact-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -495,7 +525,20 @@
       return;
     }
 
-    // 1. Update button state to show it is sending
+    // ADDED: hCaptcha Frontend Validation
+    const hcaptchaResponse = document.querySelector('[name=h-captcha-response]');
+    if (hcaptchaResponse && !hcaptchaResponse.value) {
+      const btn = document.querySelector('.btn-submit');
+      btn.textContent = 'Please complete the Captcha';
+      btn.style.background = '#c0392b';
+      setTimeout(() => {
+        btn.textContent = 'Send request';
+        btn.style.background = '';
+      }, 2200);
+      return;
+    }
+
+    // 1. Update button state
     const btn = document.querySelector('.btn-submit');
     const originalText = btn.textContent;
     btn.textContent = 'Sending...';
@@ -507,7 +550,7 @@
     const object = Object.fromEntries(formData);
     const json = JSON.stringify(object);
 
-    // 3. Send the request to your backend function instead of Web3Forms directly
+    // 3. Send the request
     fetch("/.netlify/functions/submit", {
       method: "POST",
       headers: {
@@ -518,14 +561,13 @@
     })
     .then(async (response) => {
       let result = await response.json();
-      if (response.status == 200) {
-        // Success! Hide the form and show your custom success screen
+      if (response.status == 200 || response.status == 201) {
         document.getElementById('form-container').style.display = 'none';
         document.getElementById('form-success').style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         console.log(response);
-        alert("Oops! Something went wrong: " + result.message);
+        alert("Oops! Something went wrong: " + (result.message || "Please try again."));
       }
     })
     .catch(error => {
@@ -533,21 +575,26 @@
       alert("Oops! Something went wrong submitting your request.");
     })
     .finally(() => {
-      // 4. Reset button state regardless of outcome
+      // 4. Reset button and form state
       btn.textContent = originalText;
       btn.disabled = false;
       btn.style.opacity = '1';
-      
-      // Clear the form fields
       document.getElementById('contact-form').reset();
+      
+      // Reset hCaptcha if it exists
+      if (typeof hcaptcha !== 'undefined') {
+        hcaptcha.reset();
+      }
     });
   });
 
-  // Reset form function to return to initial state
   function resetForm() {
     document.getElementById('contact-form').reset();
     document.getElementById('form-container').style.display = 'block';
     document.getElementById('form-success').style.display = 'none';
+    if (typeof hcaptcha !== 'undefined') {
+      hcaptcha.reset();
+    }
   }
 </script>
 
