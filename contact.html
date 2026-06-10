@@ -305,11 +305,12 @@
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">Eyes of Sai</a>
+  <a href="index.html" class="nav-logo">Saikrishna Sunkara</a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="gallery.html">Portfolio</a></li>
     <li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="privacy.html">Privacy Policy</a></li>
   </ul>
 </nav>
 
@@ -319,8 +320,8 @@
     <p class="contact-eyebrow">Let's work together</p>
     <h1 class="contact-title">Tell me<br/>about your<br/><em>project.</em></h1>
     <p class="contact-desc">
-      Whether you need portraits, have a landscape shoot in mind, want event coverage,
-      or you're looking for trackside motorsport photography — I'd love to hear from you.
+       Whether you need portraits, have a landscape shoot in mind, or want event coverage,
+       I'd love to hear from you.
     </p>
     <div class="contact-details">
       <div class="contact-detail">
@@ -472,10 +473,18 @@
 </footer>
 
 <script>
-  // ADDED: Set minimum date dynamically to prevent selecting past dates
+  // ADDED: Set minimum date dynamically to strictly future dates (tomorrow onwards)
   const dateInput = document.getElementById('date');
   if (dateInput) {
-    dateInput.min = new Date().toISOString().split("T")[0];
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1); // Add one day to the current local date
+    
+    // Format manually as YYYY-MM-DD to avoid UTC timezone shifts
+    const yyyy = tomorrow.getFullYear();
+    const mm = String(tomorrow.getMonth() + 1).padStart(2, '0'); // Months are 0-11, so we add 1
+    const dd = String(tomorrow.getDate()).padStart(2, '0');
+    
+    dateInput.min = `${yyyy}-${mm}-${dd}`;
   }
 
   // ADDED: Dynamic Input Restrictions
