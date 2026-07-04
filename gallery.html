@@ -27,6 +27,7 @@
     font-family: 'DM Sans', sans-serif;
     background: var(--cream);
     color: var(--ink);
+    overflow-x: hidden;
   }
 
   nav {
@@ -58,6 +59,26 @@
   }
   .nav-links a:hover { color: var(--ink); }
   .nav-links a.active { color: var(--ink); border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    z-index: 110;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--ink);
+    margin: 5px 0;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
   /* PAGE HEADER */
   .page-header {
@@ -108,6 +129,7 @@
     cursor: pointer;
     position: relative;
     transition: color 0.2s;
+    white-space: nowrap;
   }
 
   .filter-btn::after {
@@ -280,13 +302,129 @@
 
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   .gallery-section { animation: fadeIn 0.4s ease; }
+
+  /* =========================================================
+     RESPONSIVE — TABLET (<=1024px)
+     ========================================================= */
+  @media (max-width: 1024px) {
+    nav { padding: 1.25rem 2.5rem; }
+    .page-header { padding: 8.5rem 2.5rem 3rem; }
+    .filters { padding: 0 2.5rem 2.5rem; }
+    .gallery-section { padding: 3rem 2.5rem 5rem; }
+    .section-divider { margin: 0 2.5rem; }
+    footer { padding: 2rem 2.5rem; }
+
+    #portraits .photo-grid.four-col,
+    .photo-grid.four-col { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* =========================================================
+     RESPONSIVE — MOBILE (<=768px)
+     ========================================================= */
+  @media (max-width: 768px) {
+    nav { padding: 1.1rem 1.5rem; }
+
+    /* Hamburger menu */
+    .nav-toggle { display: block; }
+    .nav-links {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100vh;
+      width: min(75vw, 300px);
+      background: var(--cream);
+      flex-direction: column;
+      gap: 0;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem 2.5rem;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      box-shadow: -4px 0 24px rgba(0,0,0,0.08);
+    }
+    .nav-links.open { transform: translateX(0); }
+    .nav-links li { width: 100%; padding: 0.9rem 0; border-bottom: 1px solid var(--border); }
+    .nav-links a { font-size: 0.9rem; }
+
+    /* Page header stacks, subtitle left-aligns under title */
+    .page-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 5.5rem 1.5rem 2.5rem;
+    }
+    .page-title { font-size: clamp(2.4rem, 10vw, 3rem); }
+    .page-subtitle { text-align: left; max-width: 100%; }
+
+    /* Filters become a horizontally scrollable strip */
+    .filters {
+      padding: 0 1.5rem 1.5rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .filters::-webkit-scrollbar { display: none; }
+    .filter-btn { padding: 0.6rem 1rem; flex: 0 0 auto; }
+    .filter-btn::after { left: 1rem; right: 1rem; }
+
+    .gallery-section { padding: 2.5rem 1.5rem 3.5rem; }
+    .section-divider { margin: 0 1.5rem; }
+    .section-header { flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .section-title { font-size: 1.6rem; }
+    .section-desc { font-size: 0.85rem; margin-bottom: 1.75rem; }
+
+    /* Grids collapse to 2 columns; every explicit "span 2" override is
+       reset so nothing overflows a 2-column track */
+    .photo-grid,
+    .photo-grid.four-col,
+    #portraits .photo-grid.four-col,
+    .photo-grid.two-col {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .photo-item[style*="grid-column"] { grid-column: auto !important; }
+    .photo-item[style*="grid-row"] { grid-row: auto !important; }
+
+    /* Motorsport section has manual 16/9 inline styles that read fine on
+       desktop but get cropped too tight on narrow columns */
+    .photo-item.wide { aspect-ratio: 4/3; }
+
+    footer {
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      gap: 0.6rem;
+      margin-top: 2.5rem;
+    }
+  }
+
+  /* =========================================================
+     RESPONSIVE — SMALL PHONES (<=420px)
+     ========================================================= */
+  @media (max-width: 420px) {
+    .page-header, .filters, .gallery-section, footer {
+      padding-left: 1.1rem;
+      padding-right: 1.1rem;
+    }
+    .section-divider { margin: 0 1.1rem; }
+
+    /* At this width even 2-up feels tight for portrait/tall crops */
+    .photo-grid,
+    .photo-grid.four-col,
+    #portraits .photo-grid.four-col,
+    .photo-grid.two-col {
+      grid-template-columns: 1fr;
+    }
+    .photo-item.tall, .photo-item.portrait { aspect-ratio: 4/3; }
+  }
 </style>
 </head>
 <body>
 
 <nav>
   <a href="index.html" class="nav-logo">Saikrishna Sunkara</a>
-  <ul class="nav-links">
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="index.html">Home</a></li>
     <li><a href="gallery.html" class="active">Portfolio</a></li>
     <li><a href="contact.html">Contact</a></li>
@@ -485,6 +623,22 @@
     const btn = document.querySelector(`[data-filter="${hash}"]`);
     if (btn) btn.click();
   }
+
+  // Nav hamburger toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', false);
+    });
+  });
 </script>
 </body>
 </html>
