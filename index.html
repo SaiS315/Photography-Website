@@ -482,6 +482,27 @@
   }
   .footer-social:hover { color: var(--accent); }
 
+  .footer-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .footer-privacy {
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-privacy:hover { color: var(--accent); }
+  .footer-privacy::before {
+    content: '·';
+    margin-right: 0.6rem;
+    color: var(--ink-faint);
+  }
+
   .ph { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; gap: 0.5rem; }
   .ph svg { opacity: 0.18; }
   .ph span { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(245,242,236,0.25); }
@@ -611,7 +632,6 @@
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="gallery.html">Portfolio</a></li>
     <li><a href="contact.html">Contact</a></li>
-    <li><a href="privacy.html">Privacy Policy</a></li>
   </ul>
 </nav>
  
@@ -802,7 +822,10 @@
 <!-- FOOTER -->
 <footer>
   <span class="footer-logo">Saikrishna Sunkara</span>
-  <span class="footer-copy">© 2026 Saikrishna Sunkara. All rights reserved.</span>
+  <div class="footer-meta">
+    <span class="footer-copy">© 2026 Saikrishna Sunkara. All rights reserved.</span>
+    <a href="privacy.html" class="footer-privacy">Privacy Policy</a>
+  </div>
   <a href="https://instagram.com/eyes_of_sai" class="footer-social" target="_blank">@eyes_of_sai</a>
 </footer>
 

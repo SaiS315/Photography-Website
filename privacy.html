@@ -279,6 +279,27 @@
   .footer-social { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
   .footer-social:hover { color: var(--accent); }
 
+  .footer-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .footer-privacy {
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-privacy:hover { color: var(--accent); }
+  .footer-privacy::before {
+    content: '·';
+    margin-right: 0.6rem;
+    color: var(--ink-faint);
+  }
+
   /* =========================================================
      RESPONSIVE — TABLET (<=1024px)
      ========================================================= */
@@ -396,7 +417,6 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="gallery.html">Portfolio</a></li>
     <li><a href="contact.html">Contact</a></li>
-    <li><a href="privacy.html" class="active">Privacy Policy</a></li>   
   </ul>
 </nav>
 
@@ -417,7 +437,7 @@
       <li><a href="#contact-section">Contact</a></li>
     </ul>
     <div class="sidebar-updated">
-      Last updated<br/>January 2026
+      Last updated<br/>July 2026
     </div>
   </aside>
 
@@ -427,7 +447,7 @@
     <h1 class="page-title">Terms &amp; <em>Privacy.</em></h1>
     <p class="page-intro">
       These terms govern the use of this website and any photography services provided by
-      Saikrishna Sunkara (@eyes_of_sai). By using this site or booking a session, you agree
+      Saikrishna Sunkara (@eyes_of_sai on Instagram). By using this site or booking a session, you agree
       to the terms below. Please read them carefully and reach out if anything is unclear.
     </p>
 
@@ -464,8 +484,8 @@
         <li>Sending to friends and family</li>
       </ul>
       <p class="doc-body">
-        <strong>Commercial use</strong>, including use in advertising, publications, or any
-        revenue-generating context, requires a separate written agreement and licensing fee.
+        <strong>Commercial use</strong> — including use in advertising, publications, or any
+        revenue-generating context — requires a separate written agreement and licensing fee.
         Please contact me to discuss commercial licensing.
       </p>
     </div>
@@ -510,11 +530,11 @@
         general guidelines will apply:
       </p>
       <ul class="doc-list">
-        <li><strong>Cancellations with more than 7 days notice</strong>: deposits may be applied to a rescheduled date. If it is an outright cancellation, the deposit will be returned.</li>
-        <li><strong>Cancellations with less than 24 hours notice</strong>: deposits are non-refundable.</li>
-        <li><strong>Rescheduling</strong>: subject to availability; please give as much notice as possible. Please feel free
+        <li><strong>Cancellations with more than 7 days notice</strong> — deposits may be applied to a rescheduled date. If it is an outright cancellation, the depsoit will be returned.</li>
+        <li><strong>Cancellations with less than 24 hours notice</strong> — deposits are non-refundable.</li>
+        <li><strong>Rescheduling</strong> — subject to availability; please give as much notice as possible. Please feel free
         to reach out in situations like this in the interest of both parties.</li>
-        <li><strong>Cancellation by photographer</strong>: a full refund of any deposits paid will be issued.</li>
+        <li><strong>Cancellation by photographer</strong> — a full refund of any deposits paid will be issued.</li>
       </ul>
       <p class="doc-body">
         All cancellation requests must be made in writing via email or the contact form on this site.
@@ -534,7 +554,7 @@
             a service like Google Drive or any other method agreed upon at the time of booking.
         </li>
         <li>Standard turnaround is typically 1–2 weeks from the date of the shoot unless specified otherwise.</li>
-        <li>Rush delivery may be available for an additional fee; discuss at time of booking</li>
+        <li>Rush delivery may be available for an additional fee — discuss at time of booking</li>
         <li>I do not share RAW files as part of my standard deliverables.</li>
       </ul>
       <p class="doc-body">
@@ -568,9 +588,9 @@
         The following types of personal data may be collected when you use this site:
       </p>
       <ul class="doc-list">
-        <li><strong>Contact information</strong>: name, email address, and phone number submitted via the contact form</li>
-        <li><strong>Project details</strong>: information you voluntarily provide about your shoot or event</li>
-        <li><strong>Usage data</strong>: basic analytics such as pages visited and time on site, collected anonymously</li>
+        <li><strong>Contact information</strong> — name, email address, and phone number submitted via the contact form</li>
+        <li><strong>Project details</strong> — information you voluntarily provide about your shoot or event</li>
+        <li><strong>Usage data</strong> — basic analytics such as pages visited and time on site, collected anonymously</li>
       </ul>
       <p class="doc-body">
         You may request deletion of any personal data held by contacting me directly. Requests
@@ -597,7 +617,10 @@
 
 <footer>
   <span class="footer-logo">Saikrishna Sunkara</span>
-  <span class="footer-copy">© 2026 Saikrishna Sunkara. All rights reserved.</span>
+  <div class="footer-meta">
+    <span class="footer-copy">© 2026 Saikrishna Sunkara. All rights reserved.</span>
+    <a href="privacy.html" class="footer-privacy">Privacy Policy</a>
+  </div>
   <a href="https://instagram.com/eyes_of_sai" class="footer-social" target="_blank">@eyes_of_sai</a>
 </footer>
 
