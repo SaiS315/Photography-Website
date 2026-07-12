@@ -170,14 +170,29 @@
     object-fit: cover;
   }
 
-  /* Hero image overlay text */
+  /* Dark scrim behind the label so it reads on any photo, light or dark */
+  .hero-img-block::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 45%;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%);
+    pointer-events: none;
+  }
+
+  /* Hero image overlay text — solid chip behind the label guarantees
+     contrast no matter how light or busy the underlying photo is */
   .hero-img-label {
     position: absolute;
     bottom: 1rem; left: 1rem;
+    z-index: 1;
     font-size: 0.68rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(245,242,236,0.55);
+    color: #f5f2ec;
+    background: rgba(26,25,22,0.72);
+    padding: 0.35rem 0.65rem;
+    border-radius: 2px;
   }
   
   /* ABOUT */
